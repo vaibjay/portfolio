@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaibhav Jayakumar — Mechanical Engineering</title>
+<meta name="description" content="Vaibhav Jayakumar — Mechanical Engineering student at Cal Poly SLO. I design, build, and test mechanical and electromechanical systems, from competition robots to production hardware.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta property="og:title" content="Vaibhav Jayakumar — Mechanical Engineering">
+<meta property="og:description" content="I design, build, and test mechanical and electromechanical systems, from competition robots to production hardware.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg:#08080A;
+    --bg-2:#0F0F12;
+    --bg-3:#17171B;
+    --line:#242429;
+    --line-soft:#1A1A1E;
+    --ink:#F5F5F7;
+    --ink-soft:#98989E;
+    --ink-dim:#5E5E64;
+    --accent:#FF9B6A;
+    --accent-ink:#2A1206;
+    --accent-soft:rgba(255,155,106,0.10);
+    --ease: cubic-bezier(.16,1,.3,1);
+    --r-sm:10px;
+    --r-md:16px;
+    --r-lg:22px;
+    --r-pill:980px;
+    --max:1140px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{ max-width:100%; display:block; }
+  h1,h2,h3,h4{ font-family:inherit; font-weight:700; margin:0; letter-spacing:-0.02em; }
+  a{ color:inherit; }
+  ::selection{ background:var(--accent); color:var(--accent-ink); }
+  ::-webkit-scrollbar{ width:10px; }
+  ::-webkit-scrollbar-track{ background:var(--bg); }
+  ::-webkit-scrollbar-thumb{ background:var(--line); border-radius:8px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+  }
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+  /* =====================================================
+     APP SHELL
+  ===================================================== */
+  #app[hidden]{ display:none; }
+
+  .glow{ position:fixed; border-radius:50%; filter:blur(110px); opacity:.14; pointer-events:none; z-index:0; background:var(--accent); }
+  .glow1{ width:600px; height:600px; top:-220px; right:-180px; }
+  .glow2{ width:460px; height:460px; bottom:-220px; left:-160px; opacity:.08; }
+
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(8,8,10,0.72);
+    backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-weight:700; font-size:15px; text-decoration:none;
+    display:flex; align-items:center; gap:8px; cursor:pointer; background:none; border:none; color:var(--ink); padding:0;
+    letter-spacing:-0.01em;
+  }
+  .nav-mark .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none; }
+  nav.tabs{ display:flex; gap:4px; align-items:center; }
+  nav.tabs button{
+    background:transparent; border:none; cursor:pointer;
+    font-size:13px; font-weight:600; color:var(--ink); opacity:.6; padding:9px 17px;
+    border-radius:var(--r-pill); transition:color .2s var(--ease), opacity .2s var(--ease), background .2s var(--ease);
+    letter-spacing:-0.005em;
+  }
+  nav.tabs button:hover{ opacity:1; }
+  nav.tabs button.active{ color:var(--accent-ink); opacity:1; background:var(--accent); }
+  .nav-toggle{ display:none; }
+
+  @media (max-width:820px){
+    nav.tabs{ display:none; }
+    .nav-toggle{
+      display:block; background:none; border:1px solid var(--line); color:var(--ink-soft);
+      font-size:12.5px; padding:8px 14px; border-radius:var(--r-pill);
+    }
+  }
+  #mobileMenu{ display:none; flex-direction:column; border-top:1px solid var(--line); }
+  #mobileMenu.open{ display:flex; }
+  #mobileMenu button{
+    background:none; border:none; text-align:left; color:var(--ink-soft); cursor:pointer;
+    font-size:14px; font-weight:500; padding:16px 28px; border-bottom:1px solid var(--line-soft);
+  }
+  #mobileMenu button.active{ color:var(--accent); }
+
+  .page{ display:none; position:relative; z-index:1; }
+  .page.active{ display:block; }
+
+  /* scroll reveal */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  .eyebrow{
+    font-size:12.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:18px; display:inline-block;
+  }
+
+  /* =====================================================
+     HOME / HERO
+  ===================================================== */
+  .hero{ position:relative; padding:120px 0 90px; }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:64px; align-items:center; }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; gap:48px; } }
+
+  .hero h1{
+    font-size:clamp(44px,6.4vw,76px); line-height:1.02; letter-spacing:-0.03em;
+    opacity:0; transform:translateY(18px); animation:heroIn .9s var(--ease) forwards; animation-delay:.15s;
+  }
+  .hero-mission{
+    margin-top:24px; font-weight:600; font-size:clamp(19px,2.4vw,24px); max-width:560px; color:var(--ink);
+    opacity:0; transform:translateY(18px); animation:heroIn .9s var(--ease) forwards; animation-delay:.32s;
+  }
+  .hero-sub{
+    margin-top:14px; font-size:16px; color:var(--ink-soft); max-width:480px; font-weight:400;
+    opacity:0; transform:translateY(18px); animation:heroIn .9s var(--ease) forwards; animation-delay:.44s;
+  }
+  @keyframes heroIn{ to{ opacity:1; transform:translateY(0); } }
+
+  .hero-actions{
+    margin-top:36px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+    opacity:0; transform:translateY(18px); animation:heroIn .9s var(--ease) forwards; animation-delay:.56s;
+  }
+  .btn{
+    font-size:14px; font-weight:600; text-decoration:none; padding:14px 26px; border-radius:var(--r-pill);
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer; border:1px solid transparent;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-solid{ background:var(--accent); color:var(--accent-ink); }
+  .btn-solid:hover{ box-shadow:0 10px 30px -10px rgba(255,155,106,0.55); }
+  .btn-outline{ background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-outline:hover{ border-color:var(--ink-soft); }
+
+  .hero-links{
+    margin-top:28px; display:flex; gap:22px; flex-wrap:wrap;
+    opacity:0; transform:translateY(18px); animation:heroIn .9s var(--ease) forwards; animation-delay:.68s;
+  }
+  .textlink{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:13.5px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+    padding:11px 18px; border-radius:var(--r-pill); border:1px solid var(--line);
+    transition:color .25s var(--ease), border-color .25s var(--ease), transform .3s var(--ease), background .25s var(--ease);
+  }
+  .textlink:hover{ color:var(--ink); border-color:var(--ink-soft); background:var(--bg-2); transform:translateY(-2px); }
+
+  .back-link{
+    font-size:13.5px; color:var(--ink-dim); text-decoration:none; background:none; border:none; cursor:pointer;
+    padding:0; display:inline-flex; align-items:center; gap:6px;
+    transition:color .25s var(--ease);
+  }
+  .back-link:hover{ color:var(--accent); }
+
+  .email-badge{
+    display:inline-flex; align-items:center; gap:9px;
+    font-size:14px; font-weight:600; color:var(--accent); text-decoration:none;
+    padding:11px 18px; border-radius:var(--r-pill);
+    background:var(--accent-soft); border:1px solid rgba(255,155,106,0.35);
+    transition:transform .3s var(--ease), background .25s var(--ease), box-shadow .3s var(--ease);
+  }
+  .email-badge:hover{ transform:translateY(-2px); background:rgba(255,155,106,0.16); box-shadow:0 10px 28px -12px rgba(255,155,106,0.55); }
+  .email-badge svg{ width:15px; height:15px; flex:none; }
+
+  /* image placeholder component */
+  .img-placeholder{
+    position:relative; border-radius:var(--r-lg); border:1px dashed var(--line);
+    background:var(--bg-2);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    color:var(--ink-dim); overflow:hidden;
+    opacity:0; transform:translateY(18px) scale(.98); animation:heroIn 1s var(--ease) forwards; animation-delay:.5s;
+  }
+  .img-placeholder svg{ width:34px; height:34px; opacity:.5; }
+  .img-placeholder .ph-label{ font-size:12px; letter-spacing:.03em; text-align:center; padding:0 24px; }
+  .img-placeholder .ph-sub{ font-size:10.5px; color:var(--ink-dim); opacity:.7; }
+
+  /* real photo: tries to load over the placeholder; if the file exists it takes over,
+     if not (onerror), it removes itself and the placeholder above stays visible as-is */
+  .media-slot{ position:relative; }
+  .media-slot .real-img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    display:none; border-radius:inherit; z-index:1;
+  }
+  .media-slot .real-img.loaded{ display:block; }
+  .media-slot .real-img.loaded ~ .img-placeholder{ display:none; }
+
+  /* ---- hero photo collage: scattered "pinned photos" made of real HTML/CSS,
+         so any photos dropped into these 4 slots automatically pick up the
+         site's framing (paper border, shadow, tilt) — no image editing needed ---- */
+  .hero-photo{ aspect-ratio:4/5; position:relative; }
+  .collage-glow{
+    position:absolute; inset:-18% -12%;
+    background:radial-gradient(ellipse at 50% 45%, rgba(255,155,106,0.32), transparent 62%);
+    filter:blur(60px);
+    pointer-events:none;
+    opacity:0; transition:opacity 1.2s var(--ease); transition-delay:.2s;
+  }
+  .collage-glow.in{ opacity:1; }
+  .hero-photo .collage-card{
+    position:absolute; border-radius:3px; overflow:hidden;
+    border:7px solid #EEEBE4; background:var(--bg-2);
+    box-shadow:0 20px 40px -14px rgba(0,0,0,0.65), 0 2px 8px rgba(0,0,0,0.35);
+    opacity:0; transform:translateY(16px) scale(.97) rotate(var(--r,0deg));
+    transition:opacity .8s var(--ease), transform .8s var(--ease), box-shadow .35s var(--ease);
+  }
+  .hero-photo .collage-card.in{ opacity:1; transform:translateY(0) scale(1) rotate(var(--r,0deg)); }
+  .hero-photo .collage-card img{ display:block; width:100%; height:100%; object-fit:cover; }
+  .hero-photo .collage-card:hover{
+    transform:translateY(0) scale(1.045) rotate(var(--r,0deg));
+    box-shadow:0 26px 54px -14px rgba(255,155,106,0.4), 0 20px 40px -14px rgba(0,0,0,0.65);
+    z-index:5;
+  }
+  .cc-1{ --r:-4deg; left:19%; top:7%;  width:47%; height:28%; transition-delay:.05s; }
+  .cc-2{ --r:5deg;  left:48%; top:31%; width:41%; height:27%; transition-delay:.15s; }
+  .cc-3{ --r:-3deg; left:12%; top:52%; width:45%; height:29%; transition-delay:.25s; }
+  .cc-4{ --r:4deg;  left:46%; top:74%; width:41%; height:26%; transition-delay:.35s; }
+  @media (max-width:520px){
+    .cc-1{ left:16%; width:50%; height:26%; }
+    .cc-2{ left:46%; width:44%; height:25%; }
+    .cc-3{ left:8%;  width:48%; height:27%; }
+    .cc-4{ left:44%; width:44%; height:24%; }
+  }
+
+  .section{ padding:64px 0; border-top:1px solid var(--line-soft); }
+  .section-title{ font-size:clamp(24px,3.6vw,32px); margin-bottom:8px; letter-spacing:-0.02em; }
+  .section-desc{ color:var(--ink-soft); font-size:15px; margin-bottom:40px; max-width:540px; }
+
+  .proof-bar{ display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+  .proof-cell{ border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:30px 22px; transition:background .3s var(--ease); }
+  .proof-cell:hover{ background:var(--bg-2); }
+  .proof-num{ font-weight:700; font-size:30px; letter-spacing:-0.02em; color:var(--ink); }
+  .proof-lab{ margin-top:8px; font-size:12px; color:var(--ink-dim); }
+  @media (max-width:900px){ .proof-bar{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:480px){ .proof-bar{ grid-template-columns:1fr; } }
+
+  .home-preview-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .preview-card{
+    position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:var(--r-md); cursor:zoom-in;
+    border:1px solid var(--line); background:var(--bg-2);
+    transition:transform .5s var(--ease), border-color .3s var(--ease);
+  }
+  .preview-card:hover{ transform:translateY(-3px); border-color:var(--ink-dim); }
+  .preview-card img{ width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease); filter:saturate(.92); }
+  .preview-card:hover img{ transform:scale(1.05); }
+  .preview-card .cap{
+    position:absolute; left:0; right:0; bottom:0; padding:14px 16px; font-size:12.5px; font-weight:500; color:var(--ink);
+    background:linear-gradient(to top, rgba(0,0,0,.8), transparent);
+  }
+  @media (max-width:760px){ .home-preview-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:480px){ .home-preview-grid{ grid-template-columns:1fr; } }
+
+  /* =====================================================
+     EXPERIENCE / BUILDS / ABOUT SHARED
+  ===================================================== */
+  .page-head{ padding:96px 0 10px; }
+  .page-title{ font-weight:700; font-size:clamp(36px,5.6vw,54px); letter-spacing:-0.03em; }
+  .page-sub{ margin-top:14px; color:var(--ink-soft); font-size:16px; max-width:540px; }
+
+  .soft-card{ background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg); padding:32px; }
+
+  .crib{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; }
+  .crib-group{ background:var(--bg-2); padding:28px 24px; }
+  .crib-group h3{ font-size:14px; margin-bottom:12px; font-weight:600; color:var(--ink); line-height:1.35; }
+  .crib-group p{ font-size:13.5px; color:var(--ink-soft); margin:0; line-height:1.6; }
+  @media (max-width:900px){ .crib{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .crib{ grid-template-columns:1fr; } }
+
+  .timeline{ display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; }
+  .tl-item{
+    background:var(--bg-2); padding:32px; display:grid; grid-template-columns:150px 1fr; gap:28px;
+    transition:background .3s var(--ease);
+  }
+  .tl-item:hover{ background:var(--bg-3); }
+  .tl-date{ font-size:13px; font-weight:600; color:var(--accent); padding-top:3px; }
+  .tl-body h3{ font-size:18.5px; margin-bottom:4px; color:var(--ink); }
+  .tl-role{ font-size:12.5px; color:var(--ink-dim); margin-bottom:14px; font-weight:500; }
+  .tl-body ul{ margin:0; padding-left:18px; }
+  .tl-body li{ margin-bottom:7px; font-size:14.5px; color:var(--ink-soft); }
+  @media (max-width:700px){ .tl-item{ grid-template-columns:1fr; gap:8px; padding:26px; } }
+
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  @media (max-width:800px){ .two-col{ grid-template-columns:1fr; } }
+  .edu-item{ padding:20px 0; border-top:1px solid var(--line-soft); }
+  .edu-item:first-child{ border-top:none; padding-top:0; }
+  .edu-item .school{ font-size:16.5px; font-weight:600; color:var(--ink); }
+  .edu-item .deg{ font-size:13.5px; color:var(--ink-soft); margin-top:5px; }
+  .edu-item .yr{ font-size:12px; font-weight:600; color:var(--accent); margin-top:8px; }
+
+  .award{ display:flex; gap:14px; padding:14px 0; border-top:1px solid var(--line-soft); }
+  .award:first-child{ border-top:none; padding-top:0; }
+  .award .mk{ font-size:12px; font-weight:600; color:var(--accent); padding-top:2px; flex:none; width:46px; }
+  .award .tx{ font-size:14px; color:var(--ink-soft); }
+
+  .subhead{ font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-dim); margin-bottom:18px; }
+
+  .coursework-list{ display:flex; flex-wrap:wrap; gap:10px; }
+  .coursework-list span{
+    font-size:13.5px; color:var(--ink-soft); border:1px solid var(--line); background:var(--bg-2);
+    padding:9px 16px; border-radius:var(--r-pill); transition:border-color .25s var(--ease), color .25s var(--ease);
+  }
+  .coursework-list span:hover{ border-color:var(--accent); color:var(--ink); }
+
+  /* =====================================================
+     BUILDS PAGE
+  ===================================================== */
+  .builds-subhead-row{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:28px; }
+  .builds-subhead-row .subhead{ margin-bottom:0; }
+  .builds-subhead-note{ font-size:13px; color:var(--ink-dim); }
+
+  .builds-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+  @media (max-width:820px){ .builds-grid{ grid-template-columns:1fr; } }
+
+  .other-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:900px){ .other-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .other-grid{ grid-template-columns:1fr; } }
+
+  .build-card{
+    background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden;
+    display:flex; flex-direction:column; cursor:pointer;
+    transition:transform .3s var(--ease), border-color .3s var(--ease);
+  }
+  .build-card:hover{ transform:translateY(-3px); border-color:var(--ink-dim); }
+  .build-card .img-placeholder{ aspect-ratio:16/10; opacity:1; transform:none; animation:none; border-radius:0; border-width:0 0 1px 0; }
+  .build-body{ padding:22px 24px 24px; }
+  .build-year{ font-size:11.5px; color:var(--ink-dim); font-weight:500; }
+  .build-body h3{ font-size:19px; margin:6px 0 10px; color:var(--ink); }
+  .build-desc{ font-size:14.5px; color:var(--ink-soft); margin-bottom:16px; }
+  .build-tags{ display:flex; flex-wrap:wrap; gap:5px 12px; margin-bottom:16px; }
+  .build-tags span{ font-size:11px; color:var(--ink-dim); }
+  .build-tags span:not(:last-child)::after{ content:"·"; margin-left:12px; color:var(--line); }
+  .view-case{ font-size:13px; font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:6px; transition:gap .25s var(--ease); }
+  .build-card:hover .view-case{ gap:10px; }
+
+  /* other (smaller, non-clickable) cards */
+  .other-card{ background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; display:flex; flex-direction:column; }
+  .other-card .img-placeholder{ aspect-ratio:4/3; opacity:1; transform:none; animation:none; border-radius:0; border-width:0 0 1px 0; }
+  .other-card .other-body{ padding:18px 20px 20px; }
+  .other-card .build-year{ display:block; margin-bottom:4px; }
+  .other-card h4{ font-size:15.5px; margin:0 0 8px; color:var(--ink); font-weight:600; }
+  .other-card p{ font-size:13px; color:var(--ink-soft); margin:0 0 12px; line-height:1.55; }
+  .other-card .build-tags{ margin-bottom:0; }
+
+  /* ---- featured project detail page ---- */
+  .case-media{ margin-bottom:36px; }
+  .case-media .img-placeholder{ aspect-ratio:21/9; }
+  @media (max-width:700px){ .case-media .img-placeholder{ aspect-ratio:4/3; } }
+  .case-eyebrow-row{ display:flex; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+  .case-status{ font-size:11.5px; font-weight:600; color:var(--accent); }
+  .case-title{ font-weight:700; font-size:clamp(30px,4.6vw,44px); letter-spacing:-0.03em; margin-bottom:28px; }
+  .case-meta{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-bottom:44px; padding-bottom:36px; border-bottom:1px solid var(--line); }
+  @media (max-width:700px){ .case-meta{ grid-template-columns:1fr; gap:20px; } }
+  .case-meta-cell .lab{ font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-dim); margin-bottom:8px; }
+  .case-meta-cell .val{ font-size:14.5px; color:var(--ink); line-height:1.55; }
+  .case-overview{ font-size:17px; color:var(--ink-soft); max-width:720px; margin-bottom:44px; line-height:1.75; }
+  .case-block-label{ font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-dim); margin-bottom:16px; }
+  .case-subheading{ font-size:14px; font-weight:600; color:var(--ink); margin:22px 0 12px; }
+  .case-list{ list-style:none; margin:0 0 8px; padding:0; max-width:720px; }
+  .case-list li{ position:relative; padding:0 0 14px 22px; font-size:15.5px; color:var(--ink-soft); line-height:1.6; }
+  .case-list li::before{ content:"–"; position:absolute; left:0; top:0; color:var(--ink-dim); }
+  .case-engineering-work{ margin-bottom:8px; }
+
+  .case-team-context{
+    max-width:720px; margin:36px 0 44px; padding:24px 26px; border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-2);
+  }
+  .case-team-context .case-block-label{ margin-bottom:10px; }
+  .case-team-context .note{ font-size:12.5px; color:var(--ink-dim); margin-bottom:14px; }
+  .case-team-context ul{ list-style:none; margin:0; padding:0; }
+  .case-team-context li{ font-size:14px; color:var(--ink-soft); padding:6px 0; border-top:1px solid var(--line-soft); }
+  .case-team-context li:first-child{ border-top:none; }
+
+  .case-media-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:12px; }
+  @media (max-width:700px){ .case-media-grid{ grid-template-columns:1fr; } }
+  .case-media-item .img-placeholder{ aspect-ratio:4/3; }
+  .case-media-caption{ font-size:12.5px; color:var(--ink-dim); margin-top:10px; }
+
+  /* =====================================================
+     ABOUT PAGE
+  ===================================================== */
+  .about-grid{ display:grid; grid-template-columns:0.8fr 1.2fr; gap:56px; align-items:start; }
+  @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; gap:40px; } }
+  .about-photo{ aspect-ratio:1/1; position:sticky; top:110px; }
+  @media (max-width:860px){ .about-photo{ position:static; max-width:280px; } }
+
+  .about-body p{ font-size:17px; color:var(--ink-soft); margin:0 0 22px; line-height:1.75; }
+  .about-body p:first-child{ color:var(--ink); }
+
+  .about-contact-row{ margin-top:36px; font-size:14.5px; color:var(--ink-dim); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .about-contact-row a{ color:var(--ink-soft); text-decoration:none; transition:color .2s var(--ease); }
+  .about-contact-row a:hover{ color:var(--accent); }
+  .about-contact-row .sep{ color:var(--line); }
+</style>
+</head>
+<body>
+
+<!-- ============ APP ============ -->
+<div id="app">
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
+
+  <header class="site-nav">
+    <div class="nav-inner">
+      <button class="nav-mark" data-goto="home"><span class="dot"></span>Vaibhav Jayakumar</button>
+      <nav class="tabs" id="tabNav">
+        <button data-tab="home">Home</button>
+        <button data-tab="experience">Experience</button>
+        <button data-tab="builds">Builds</button>
+        <button data-tab="about">About</button>
+      </nav>
+      <button class="nav-toggle" id="navToggle">Menu</button>
+    </div>
+    <div id="mobileMenu">
+      <button data-tab="home">Home</button>
+      <button data-tab="experience">Experience</button>
+      <button data-tab="builds">Builds</button>
+      <button data-tab="about">About</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= HOME ================= -->
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-text">
+            <div class="eyebrow" style="opacity:0; transform:translateY(18px); animation:heroIn .9s var(--ease) forwards;">Mechanical Engineering @ Cal Poly SLO</div>
+            <h1>Vaibhav<br>Jayakumar</h1>
+            <p class="hero-mission">I design, build, and test mechanical and electromechanical systems — from competition robots to production hardware.</p>
+
+            <div class="hero-actions">
+              <button class="btn btn-solid" data-goto="builds">View Builds</button>
+              <button class="btn btn-outline" data-goto="experience">View Experience</button>
+            </div>
+
+            <div class="hero-links" style="align-items:center;">
+              <a class="email-badge" href="mailto:vjayakum@calpoly.edu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+                vjayakum@calpoly.edu
+              </a>
+              <a class="textlink" href="https://www.linkedin.com/in/vaibhav-jayakumar-44b622285" target="_blank">LinkedIn ↗</a>
+              <a class="textlink" href="resume.pdf" download="Vaibhav Jayakumar Resume 2027.pdf">Resume (PDF)</a>
+            </div>
+          </div>
+
+          <div class="hero-photo">
+            <div class="collage-glow reveal"></div>
+            <div class="collage-card reveal cc-1"><img src="images/hero-photo-1.jpg" alt="Vaibhav machining on a Stepcraft CNC" data-base="hero-photo-1" data-ext-idx="0" onerror="tryNextExt(this)"></div>
+            <div class="collage-card reveal cc-2"><img src="images/hero-photo-2.jpg" alt="Vaibhav soldering and wiring a robot" data-base="hero-photo-2" data-ext-idx="0" onerror="tryNextExt(this)"></div>
+            <div class="collage-card reveal cc-3"><img src="images/hero-photo-3.jpg" alt="Vaibhav's air hockey table in use" data-base="hero-photo-3" data-ext-idx="0" onerror="tryNextExt(this)"></div>
+            <div class="collage-card reveal cc-4"><img src="images/hero-photo-4.jpg" alt="Vaibhav assembling a project by hand" data-base="hero-photo-4" data-ext-idx="0" onerror="tryNextExt(this)"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section class="page" id="page-experience">
+      <div class="wrap page-head">
+        <div class="eyebrow">Experience</div>
+        <h2 class="page-title">Built under real deadlines.</h2>
+        <div class="hero-actions" style="margin-top:24px;">
+          <a href="resume.pdf" download="Vaibhav Jayakumar Resume 2027.pdf" class="btn btn-outline">Download resume (PDF)</a>
+        </div>
+      </div>
+
+      <div class="section" style="border-top:none; padding-bottom:32px;">
+        <div class="wrap reveal">
+          <div class="subhead">Education</div>
+          <div class="two-col">
+            <div class="edu-item">
+              <div class="school">California Polytechnic University, San Luis Obispo</div>
+              <div class="deg">B.S., Mechanical Engineering</div>
+              <div class="yr">Graduation 2029</div>
+            </div>
+            <div class="edu-item">
+              <div class="school">Irvington High School</div>
+              <div class="deg">Unweighted GPA: 3.98</div>
+              <div class="yr">Graduation 2025</div>
+            </div>
+          </div>
+
+          <div class="subhead" style="margin-top:40px;">Relevant Coursework</div>
+          <div class="coursework-list">
+            <span>Intro to ME</span>
+            <span>Materials Joining (Welding)</span>
+            <span>Linear Analysis</span>
+            <span>Engineering Design</span>
+            <span>Subtractive Manufacturing</span>
+            <span>Principles of Engineering</span>
+            <span>Physics: Mechanics</span>
+            <span>Physics: Waves &amp; Optics</span>
+            <span>Physics: Electricity &amp; Magnetism</span>
+            <span>Statics</span>
+            <span>Engineering Measurement and Data Analysis</span>
+            <span>Materials Sciences</span>
+          </div>
+
+          <div class="subhead" style="margin-top:40px;">Skills</div>
+          <div class="crib">
+            <div class="crib-group">
+              <h3>Mechanical Design &amp; CAD</h3>
+              <p>SolidWorks, Fusion 360, Inventor, Onshape, Geomagic, Design for Manufacturing (DFM)</p>
+            </div>
+            <div class="crib-group">
+              <h3>Manufacturing &amp; Prototyping</h3>
+              <p>CNC machining, FDM/SLA/SLS 3D printing, prototype assembly, PCB rework, soldering, wire harnessing</p>
+            </div>
+            <div class="crib-group">
+              <h3>Testing &amp; Engineering Tools</h3>
+              <p>Instron testing, CT scanning, dimensional inspection, mechanical testing, troubleshooting, technical documentation</p>
+            </div>
+            <div class="crib-group">
+              <h3>Programming &amp; Technical Tools</h3>
+              <p>Python, MATLAB, Java, Excel, data analysis</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="padding-top:32px;">
+        <div class="wrap reveal">
+          <div class="subhead">Where I've worked</div>
+          <div class="timeline">
+
+            <div class="tl-item">
+              <div class="tl-date">JUN 2026 —<br>AUG 2026</div>
+              <div class="tl-body">
+                <h3>R&amp;D Engineering Intern</h3>
+                <div class="tl-role">Align Technology · San Jose, CA</div>
+                <ul>
+                  <li>Supported Design Verification (DV) testing for the Invisalign Palatal Expander (IPE), a Class II orthodontic medical device used to expand a patient's upper palate.</li>
+                  <li>Reduced user-to-user variability in DV testing by designing and prototyping a new fixture system in SolidWorks through 9+ design iterations.</li>
+                  <li>Conducted 34+ insertion and removal tests to characterize forces applied during insertion and removal of the IPE.</li>
+                  <li>Developed a Python tool using pandas and NumPy to clean force-time data, detect insertion/removal events, filter outliers, and automate Excel reporting.</li>
+                  <li>Developed and tested three Class I medical device IPE accessory concepts, achieving a 42:1 mechanical advantage and submitting an Invention Disclosure Form (IDF).</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-date">JUN 2024 —<br>JUL 2025</div>
+              <div class="tl-body">
+                <h3>Mechanical Engineering Intern</h3>
+                <div class="tl-role">Food Tech Startup (Stealth Mode) · Fremont, CA</div>
+                <ul>
+                  <li>Manufactured precision components for 20+ egg-cooking robots on CNC mills, SLA printers, drill presses, and table saws.</li>
+                  <li>Rapid-prototyped and tested electrical components, soldering and re-soldering PCBs to optimize functionality.</li>
+                  <li>Built a custom dynamometer from scratch to test motor torque and validate performance data.</li>
+                  <li>Refined blade angles, arm movements, and hot-plate assemblies through iterative machining for efficiency.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-date">AUG 2020 —<br>JAN 2024</div>
+              <div class="tl-body">
+                <h3>Team Captain &amp; Mechanical Lead</h3>
+                <div class="tl-role">First Tech Challenge (FTC) Robotics · Fremont, CA</div>
+                <ul>
+                  <li>Team Captain, Techarinos 18767 (2020–21) — led mechanical design of a 3D-printed claw, taught 120+ kids Scratch and basic programming.</li>
+                  <li>Team Captain &amp; Mechanical Lead, Blizzard Robotics 18373 (2023) — led a team of 8 through the FTC CenterStage season.</li>
+                  <li>Designed and manufactured custom drivetrains, lift systems, intakes, and odometry systems across four robot generations.</li>
+                  <li>Ranked 18th nationally by the FUN Robotics Network (2022); earned Motivate and Inspire awards at regionals.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-date">MAR 2023 —<br>JUL 2025</div>
+              <div class="tl-body">
+                <h3>Entrepreneur in Residence &amp; School Representative</h3>
+                <div class="tl-role">PilotCity Inc. · Fremont, CA</div>
+                <ul>
+                  <li>Designed a 3D-printed, reusable, flywheel-powered engineering kit teaching Newton's Laws, friction, and gear trains.</li>
+                  <li>Manufactured 25+ kits and distributed them internationally to schools and libraries.</li>
+                  <li>Secured 23 school and teacher partnerships for program enrollment; mentored 9 interns.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-date">MAY 2024 —<br>JUL 2025</div>
+              <div class="tl-body">
+                <h3>Lead STEM Instructor</h3>
+                <div class="tl-role">TinkerOn Labs · Fremont, CA</div>
+                <ul>
+                  <li>Co-developed curriculum and taught STEM concepts to 60+ elementary students through hands-on classes.</li>
+                  <li>Led hands-on demos for 200+ kids at Fremont Science Night, supervising safety throughout.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="wrap reveal">
+          <div class="subhead">Non-Technical Experience</div>
+          <div class="timeline">
+
+            <div class="tl-item">
+              <div class="tl-date">JUN 2017 —<br>JUL 2025</div>
+              <div class="tl-body">
+                <h3>Intern &amp; Volunteer — Coach, Fundraiser</h3>
+                <div class="tl-role">African Library Project</div>
+                <ul>
+                  <li>Set up 17 book drives for libraries across Africa, donating 15,000+ books.</li>
+                  <li>Organized fundraisers that raised $7,500, coordinated logistics, and coached 15 student volunteers who donated 3,000 books.</li>
+                  <li>Built an online forum for Drive Organizers and partnered with Hack4Impact to prototype a new web portal for organizers.</li>
+                  <li>Delivered a keynote to 200+ attendees at the 2023 Annual Conference (Harambee).</li>
+                  <li>Summer 2023: created short-form marketing content for ALP as a summer intern.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-date">JUN 2023 —<br>JUL 2023</div>
+              <div class="tl-body">
+                <h3>Summer Intern &amp; Volunteer</h3>
+                <div class="tl-role">Tamil Nadu Foundation · Chennai, India</div>
+                <ul>
+                  <li>Taught grades 6–12 at Arumbakkam Higher Secondary School across art, PE, math, science, English, and history.</li>
+                  <li>Raised $30,000 for the TNF Bay Area Chapter as event auctioneer.</li>
+                  <li>Helped organize the Youth Presentation Meeting for the Annual TNF Conference.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-date">JUN 2022 —<br>PRESENT</div>
+              <div class="tl-body">
+                <h3>Student Fundraiser and Volunteer</h3>
+                <div class="tl-role">A R Rahman Foundation · Chennai, India</div>
+                <ul>
+                  <li>Volunteered with students ages 8–17 in the Sunshine Orchestra, helping identify and solve organizational challenges.</li>
+                  <li>Donated instruments from the U.S. and raised $500 for the orchestra's first tour.</li>
+                  <li>Organized and emceed the Sunshine Orchestra Summer Benefit Concert.</li>
+                  <li>Shadowed a recording session for the Hindi film <em>Maidaan</em>.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-date">AUG 2019 —<br>PRESENT</div>
+              <div class="tl-body">
+                <h3>Bass Trombonist, Violinist, Varsity Section Leader</h3>
+                <div class="tl-role">Irvington High School · Fremont, CA</div>
+                <ul>
+                  <li>Led sections of 5–8 musicians as JV and Varsity Section Leader, winning sweepstakes at every band review during the 2022 season and setting a NorCal record of 97.05 in 2023.</li>
+                  <li>Co-wrote and published a research paper on toxicity inside low brass instruments.</li>
+                  <li>Recreational Carnatic violinist since 2019, performing at three concerts in California.</li>
+                  <li>Led chants for 200+ students at four band reviews.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="wrap reveal">
+          <div class="subhead">Honors &amp; Awards</div>
+          <div class="soft-card">
+            <div class="award"><div class="mk">2024</div><div class="tx">Gold Presidential Volunteer Service Award — 250+ hours, African Library Project</div></div>
+            <div class="award"><div class="mk">2023</div><div class="tx">Irvington HS PLTW Principles of Engineering Award of Excellence</div></div>
+            <div class="award"><div class="mk">2023</div><div class="tx">Runner-up, Instructables Contest — featured on homepage for the robotic air hockey table</div></div>
+            <div class="award"><div class="mk">2023</div><div class="tx">FTC NorCal Regionals Motivate, South Bay League Motivate, Third Inspire</div></div>
+            <div class="award"><div class="mk">2021</div><div class="tx">FTC Design Award &amp; Innovate Award</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BUILDS ================= -->
+    <section class="page" id="page-builds">
+      <div class="wrap page-head">
+        <div class="eyebrow">Builds</div>
+        <h2 class="page-title">Builds</h2>
+        <p class="page-sub">Selected mechanical systems, robots, and products I've designed, manufactured, and tested.</p>
+      </div>
+
+      <div class="section" style="border-top:none;">
+        <div class="wrap">
+          <div class="builds-subhead-row"><div class="subhead">Featured Projects</div></div>
+          <div class="builds-grid" id="featuredGrid"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="wrap">
+          <div class="builds-subhead-row"><div class="subhead">Other Projects</div></div>
+          <div class="other-grid" id="otherGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BUILD DETAIL / CASE STUDY ================= -->
+    <section class="page" id="page-build-detail">
+      <div class="wrap page-head" style="padding-top:52px; padding-bottom:0;">
+        <button class="back-link" id="backToBuilds">← Back to Builds</button>
+      </div>
+      <div class="section" style="border-top:none; padding-top:20px;" id="buildDetailContent">
+        <!-- populated by JS -->
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="page" id="page-about">
+      <div class="wrap page-head">
+        <div class="eyebrow">About</div>
+      </div>
+
+      <div class="section" style="border-top:none;">
+        <div class="wrap">
+          <div class="about-grid">
+            <div class="media-slot about-photo reveal">
+              <img class="real-img" src="images/about-photo.jpg" alt="Vaibhav Jayakumar"
+                   data-base="about-photo" data-ext-idx="0"
+                   onload="this.classList.add('loaded')" onerror="tryNextExt(this)">
+              <div class="img-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5-4-4 3-3-2-5 4"/></svg>
+                <div class="ph-label">Add a photo here<br>— a portrait or you in the shop</div>
+                <div class="ph-sub">images/about-photo.jpg <span style="opacity:.6">(.jpeg / .png also OK)</span> · square, ~1200×1200px</div>
+              </div>
+            </div>
+
+            <div class="reveal">
+              <div class="about-body">
+                <p>Hi, I'm Vaibhav. I'm a Mechanical Engineering student at Cal Poly SLO interested in robotics, manufacturing, and mechanical design.</p>
+                <p>I like working close to the hardware: designing parts, building prototypes, testing them, and figuring out why something didn't work the first time. A lot of what I've learned has come from competition robotics, hands-on manufacturing, and personal projects.</p>
+                <p>Outside engineering, I love to dance, play guitar, cook, and eat. I also enjoy teaching STEM and volunteering.</p>
+              </div>
+
+              <div class="about-contact-row">
+                <a href="mailto:vaib.jay@gmail.com">vaib.jay@gmail.com</a>
+                <span class="sep">·</span>
+                <a href="https://www.linkedin.com/in/vaibhav-jayakumar-44b622285" target="_blank">LinkedIn ↗</a>
+                <span class="sep">·</span>
+                <a href="resume.pdf" download="Vaibhav Jayakumar Resume 2027.pdf">Resume</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  /* ---------------- SCROLL REVEAL (declared early — must exist before any render call uses it) ---------------- */
+  let revealObserver;
+  function initReveal(){
+    if(!revealObserver){
+      revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('in');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+    }
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => revealObserver.observe(el));
+  }
+
+  /* ---------------- INIT ---------------- */
+  initReveal();
+  animateCounters();
+
+  /* ---------------- TAB NAVIGATION ---------------- */
+  const TAB_IDS = ['home','experience','builds','about'];
+  const pages = document.querySelectorAll('.page');
+  const tabEls = document.querySelectorAll('[data-tab]');       // real nav tabs only (top nav + mobile menu)
+  const gotoEls = document.querySelectorAll('[data-goto]');     // any other button/link that jumps to a top-level page
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function setActivePage(pageId, forceTab){
+    pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + pageId));
+    const tabToHighlight = forceTab || pageId;
+    tabEls.forEach(b => b.classList.toggle('active', b.dataset.tab === tabToHighlight));
+  }
+
+  function goto(pageId){
+    setActivePage(pageId);
+    window.scrollTo(0,0);
+    history.replaceState(null, '', '#' + pageId);
+    mobileMenu.classList.remove('open');
+    setTimeout(initReveal, 50);
+  }
+
+  tabEls.forEach(btn => btn.addEventListener('click', () => goto(btn.dataset.tab)));
+  gotoEls.forEach(btn => btn.addEventListener('click', () => goto(btn.dataset.goto)));
+
+  const initialHash = (location.hash || '#home').replace('#','');
+  const initial = TAB_IDS.includes(initialHash) ? initialHash : 'home';
+  setActivePage(initial);
+
+  document.getElementById('navToggle').addEventListener('click', () => mobileMenu.classList.toggle('open'));
+
+  /* ---------------- BUILDS DATA ---------------- */
+  const FEATURED = [
+    {
+      id:'food-robotics',
+      title:'Food Robotics Manufacturing',
+      year:'2024–2025',
+      summary:'Manufactured, assembled, and tested components for 20+ electromechanical cooking robots in a fast-paced startup environment.',
+      tags:['CNC Machining','SLA Printing','Electromechanical Assembly','Torque Testing','Rapid Prototyping'],
+      role:'Mechanical Engineering Intern',
+      teamType:'Individual contributor, startup team',
+      tools:'CNC machining, SLA printing, soldering, PCB rework, dynamometer testing',
+      overview:'Worked on fabrication, assembly, testing, and rapid iteration of automated egg-cooking robots at a stealth-mode food technology startup.',
+      engineeringWork:[
+        { bullets:[
+          'Manufactured precision components for 20+ robotic cooking systems using CNC mills, SLA printers, drill presses, table saws, and other shop tools.',
+          'Performed hands-on electromechanical assembly including tapping holes, crimping wires, soldering and re-soldering PCBs, and integrating mechanical and electrical components.',
+          'Designed and built a custom dynamometer to quantify stepper motor output torque for performance testing and validation.',
+          'Iterated mechanical components through machining and prototyping, including blade angles, arm motion, and hot-plate assemblies.',
+          'Worked under tight development deadlines while coordinating with other members of the startup team.'
+        ]}
+      ],
+      teamContext:null,
+      media:[
+        'Machining / fabricating a component',
+        'Electromechanical assembly',
+        'SLA printing in progress',
+        'Dynamometer / torque test setup',
+        'Finished component'
+      ]
+    },
+    {
+      id:'powerplay',
+      title:'FTC PowerPlay Robot',
+      year:'2022–2023',
+      summary:'Designed the linear-slide lift system for a competition robot optimized around scoring speed, reliability, and serviceability.',
+      tags:['Linear Slides','Mechanism Design','3D Printing','String-Driven Systems','FTC Robotics'],
+      role:'Mechanical Designer — Linear-Slide Lift System',
+      teamType:'Team project, FTC Robotics',
+      tools:'Misumi linear slides, Kevlar stringing, 3D printing',
+      overview:"Competition robot developed for the FTC PowerPlay season. My primary mechanical responsibility was the design and development of the linear-slide lift mechanism.",
+      engineeringWork:[
+        { bullets:[
+          "Owned the design and development of the robot's linear-slide lift mechanism.",
+          'Developed the Misumi linear-slide assembly using Kevlar stringing.',
+          'Incorporated spring-loaded string tensioning to maintain reliable tension throughout operation.',
+          'Designed the string routing and assembly with accessibility in mind so the mechanism could be serviced efficiently.',
+          'Designed custom 3D-printed slide caps and supporting components for the Misumi slide system.',
+          "Worked within the robot's packaging and scoring requirements while integrating the lift with the larger mechanism stack."
+        ]}
+      ],
+      teamContext:{
+        note:'Other engineering features of the overall robot — not personally owned:',
+        bullets:[
+          'Robot-level design feature: pocketed structural plates reduced plate weight by 58%.',
+          'Compact mecanum drivetrain.',
+          'Retractable two-wheel odometry.',
+          'Active intake with custom molded intake prongs.',
+          'Virtual four-bar mechanism.'
+        ]
+      },
+      media:[
+        'Linear-slide lift mechanism photo',
+        'Lift mechanism CAD',
+        '3D-printed slide caps',
+        'Full robot (team context)'
+      ]
+    },
+    {
+      id:'air-hockey',
+      title:'Robotic Air Hockey Defender',
+      year:'2022–2023',
+      summary:'Designed and built a single-player air hockey system combining airflow, mechanical actuation, computer vision, and controls.',
+      tags:['System Integration','CAD','Airflow Design','Computer Vision','Servo Control'],
+      role:'Mechanical Designer &amp; Builder',
+      teamType:'Individual project',
+      tools:'CAD, HSV computer vision, REV Control Hub, servo control',
+      overview:'Designed and built an air hockey table with an automated robotic defender that tracks a puck and moves to block incoming shots.',
+      engineeringWork:[
+        { bullets:[
+          'Designed the table structure, enclosed airflow system, fan plate, air chamber, perforated playing surface, side walls, and puck-retrieval geometry.',
+          'Used high-performance fans rated at 211 CFM to generate airflow for puck motion.',
+          'Designed an internal air chamber to distribute airflow across the perforated playing surface.',
+          'Used an overhead webcam and HSV color detection to isolate and track the red puck.',
+          'Integrated the tracking system with a REV Control Hub and GoBilda Super Speed Servo to actuate the robotic defender.',
+          'Mounted the servo system using a servo block and laser-cut structural frame.',
+          'Produced more than 80 pages of engineering documentation covering the project.'
+        ]}
+      ],
+      teamContext:null,
+      media:[
+        'Completed air hockey table',
+        'Cross-sectional airflow diagram',
+        'CAD model',
+        'Robotic defender mechanism',
+        'Construction photos'
+      ]
+    },
+    {
+      id:'centerstage',
+      title:'FTC CenterStage Robot',
+      year:'2023',
+      summary:'Designed the drivetrain and compliant intake systems for an FTC competition robot built around compact packaging and reliable game-piece acquisition.',
+      tags:['CNC Machining','Drivetrain Design','Belt Drives','Intake Design','FTC Robotics'],
+      role:'Mechanical Lead — Drivetrain &amp; Intake',
+      teamType:'Team project, FTC Robotics (8-person team)',
+      tools:'Fusion 360, CNC machining, belt drives, silicone molding',
+      overview:'FTC CenterStage competition robot developed by a team of eight. My primary mechanical responsibilities were the drivetrain and intake systems.',
+      engineeringWork:[
+        { heading:'Drivetrain', bullets:[
+          'Designed the compact drivetrain around custom CNC-machined aluminum side plates.',
+          'Developed the chassis around a belt-driven drivetrain architecture.',
+          'Worked through mechanical packaging of the drivetrain within the overall robot envelope.',
+          "Integrated the drivetrain architecture with the robot's localization hardware and surrounding mechanisms."
+        ]},
+        { heading:'Intake', bullets:[
+          'Developed the intake ramp and game-piece acquisition mechanism.',
+          'Used silicone-molded flaps to create compliant contact with game pieces.',
+          'Used surgical tubing with a 3D-printed internal core to tune the compliance/hardness of the intake elements.',
+          'Iterated the intake geometry to improve reliable acquisition and integration with the rest of the robot.'
+        ]}
+      ],
+      teamContext:{
+        note:'Overall robot also included — not personally owned:',
+        bullets:[
+          'Angled linear-slide lift system.',
+          'Custom 1.1k RPM motor gearbox.',
+          'Three-odometry-pod localization system.',
+          'Multiple outtake iterations and a two-servo scoring mechanism.',
+          'Elastic-energy airplane launcher.'
+        ]
+      },
+      media:[
+        'Drivetrain CAD',
+        'CNC-machined side plates',
+        'Intake mechanism (silicone flaps)',
+        'Full robot assembly'
+      ]
+    }
+  ];
+
+  const OTHER = [
+    {
+      id:'engineering-kits',
+      title:'Engineering Kits',
+      year:'2023',
+      summary:"Designed a reusable, 3D-printed flywheel-powered engineering kit that teaches physics and mechanical concepts through hands-on assembly.",
+      tags:['Product Design','3D Printing','Design for Assembly','STEM Education']
+    },
+    {
+      id:'combat-robot',
+      title:'1 lb Combat Robot',
+      year:'In Progress',
+      summary:'Designing a compact 1 lb combat robot with a horizontal spinner and integrated power electronics.',
+      tags:['Combat Robotics','Packaging','Electronics Integration','Design Under Constraints']
+    },
+    {
+      id:'trombone-stand',
+      title:'Trombone Wall Stand',
+      year:'2022',
+      summary:'Designed an adaptable wall-mounted trombone stand through more than 11 mechanical iterations.',
+      tags:['Fusion 360','Product Design','3D Printing','Iteration']
+    },
+    {
+      id:'filament-spool',
+      title:'Filament Spool Compartment',
+      year:'2021',
+      summary:'Designed a compact 3D-printed storage mechanism that fits inside a Prusament filament spool and opens around two pivot points.',
+      tags:['Fusion 360','3D Printing','Mechanism Design','Iteration']
+    },
+    {
+      id:'ultimate-goal',
+      title:'FTC Ultimate Goal Robot',
+      year:'2020–2021',
+      summary:'Early competition robotics work focused on mechanical iteration, drivetrain troubleshooting, intake development, and autonomous systems.',
+      tags:['FTC Robotics','3D Printing','Mechanism Iteration','Controls']
+    }
+  ];
+
+  const IMG_EXTS = ['jpg', 'jpeg', 'png', 'webp'];
+
+  // Called via onerror when a photo fails to load — tries the next likely
+  // extension before giving up, so uploading a .png where the doc says .jpg
+  // (or vice versa) just works without the person having to think about it.
+  function tryNextExt(img){
+    const base = img.dataset.base;
+    const idx = parseInt(img.dataset.extIdx, 10) + 1;
+    if(idx < IMG_EXTS.length){
+      img.dataset.extIdx = idx;
+      img.src = 'images/' + base + '.' + IMG_EXTS[idx];
+    } else {
+      img.remove();
+    }
+  }
+
+  function placeholderHTML(label, base, aspectClass){
+    return `<div class="media-slot ${aspectClass || ''}">
+      <img class="real-img" src="images/${base}.${IMG_EXTS[0]}" alt="${label}"
+           data-base="${base}" data-ext-idx="0"
+           onload="this.classList.add('loaded')" onerror="tryNextExt(this)">
+      <div class="img-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5-4-4 3-3-2-5 4"/></svg>
+        <div class="ph-label">${label}</div>
+        <div class="ph-sub">images/${base}.jpg <span style="opacity:.6">(.jpeg / .png also OK)</span></div>
+      </div>
+    </div>`;
+  }
+
+  const featuredGrid = document.getElementById('featuredGrid');
+  const otherGrid = document.getElementById('otherGrid');
+
+  function renderBuildsGrid(){
+    featuredGrid.innerHTML = FEATURED.map(b => `
+      <!-- Add ${b.title} photo -->
+      <div class="build-card reveal" data-build-id="${b.id}">
+        <div class="build-media">${placeholderHTML('Add photo — ' + b.title, 'build-' + b.id)}</div>
+        <div class="build-body">
+          <div class="build-year">${b.year}</div>
+          <h3>${b.title}</h3>
+          <p class="build-desc">${b.summary}</p>
+          <div class="build-tags">${b.tags.map(t => `<span>${t}</span>`).join('')}</div>
+          <div class="view-case">View Project →</div>
+        </div>
+      </div>
+    `).join('');
+    featuredGrid.querySelectorAll('.build-card').forEach(card => {
+      card.addEventListener('click', () => openBuildDetail(card.dataset.buildId));
+    });
+
+    otherGrid.innerHTML = OTHER.map(b => `
+      <!-- Add ${b.title} photo -->
+      <div class="other-card reveal">
+        <div class="build-media">${placeholderHTML('Add photo', 'other-' + b.id)}</div>
+        <div class="other-body">
+          <div class="build-year">${b.year}</div>
+          <h4>${b.title}</h4>
+          <p>${b.summary}</p>
+          <div class="build-tags">${b.tags.map(t => `<span>${t}</span>`).join('')}</div>
+        </div>
+      </div>
+    `).join('');
+
+    initReveal();
+  }
+
+  const buildDetailContent = document.getElementById('buildDetailContent');
+  function renderBuildDetail(id){
+    const b = FEATURED.find(x => x.id === id);
+    if(!b) return;
+
+    const engineeringWorkHTML = b.engineeringWork.map(group => `
+      ${group.heading ? `<div class="case-subheading">${group.heading}</div>` : ''}
+      <ul class="case-list">${group.bullets.map(x => `<li>${x}</li>`).join('')}</ul>
+    `).join('');
+
+    const teamContextHTML = b.teamContext ? `
+      <div class="case-team-context">
+        <div class="case-block-label">Team / System Context</div>
+        <div class="note">${b.teamContext.note}</div>
+        <ul>${b.teamContext.bullets.map(x => `<li>${x}</li>`).join('')}</ul>
+      </div>
+    ` : '';
+
+    const mediaHTML = b.media.map((caption, i) => `
+      <!-- Add ${caption} -->
+      <div class="case-media-item">
+        ${placeholderHTML('Add photo — ' + caption, 'build-' + b.id + '-' + (i + 1))}
+        <div class="case-media-caption">${caption}</div>
+      </div>
+    `).join('');
+
+    buildDetailContent.innerHTML = `
+      <div class="wrap">
+        <!-- Add ${b.title} hero photo or CAD render -->
+        <div class="case-media">${placeholderHTML('Add hero photo or CAD render — ' + b.title, 'build-' + b.id + '-hero')}</div>
+        <div class="case-eyebrow-row">
+          <div class="eyebrow" style="margin-bottom:0;">${b.year}</div>
+        </div>
+        <h1 class="case-title">${b.title}</h1>
+        <div class="case-meta">
+          <div class="case-meta-cell"><div class="lab">Role</div><div class="val">${b.role}</div></div>
+          <div class="case-meta-cell"><div class="lab">Project Type</div><div class="val">${b.teamType}</div></div>
+          <div class="case-meta-cell"><div class="lab">Primary Tools</div><div class="val">${b.tools}</div></div>
+        </div>
+        <p class="case-overview">${b.overview}</p>
+        <div class="case-block-label">My Engineering Work</div>
+        <div class="case-engineering-work">${engineeringWorkHTML}</div>
+        ${teamContextHTML}
+        <div class="case-block-label">Project Media</div>
+        <div class="case-media-grid">${mediaHTML}</div>
+      </div>
+    `;
+  }
+
+  function openBuildDetail(id){
+    renderBuildDetail(id);
+    setActivePage('build-detail', 'builds');
+    window.scrollTo(0,0);
+    history.replaceState(null, '', '#build-' + id);
+    setTimeout(initReveal, 50);
+  }
+
+  document.getElementById('backToBuilds').addEventListener('click', () => goto('builds'));
+
+  renderBuildsGrid();
+
+  /* ---------------- COUNTER ANIMATION ---------------- */
+  function animateCounters(){
+    const counters = document.querySelectorAll('.proof-num[data-count]');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const el = entry.target;
+          const target = parseInt(el.dataset.count, 10);
+          const suffix = el.dataset.suffix || '';
+          const duration = 1200;
+          const start = performance.now();
+          function tick(now){
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+            const val = Math.round(target * eased);
+            el.textContent = val.toLocaleString() + suffix;
+            if(t < 1){ requestAnimationFrame(tick); }
+          }
+          requestAnimationFrame(tick);
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(el => obs.observe(el));
+  }
+
+  /* ---------------- HERO PARALLAX GLOW ---------------- */
+  document.addEventListener('mousemove', (e) => {
+    const gx = (e.clientX / window.innerWidth - 0.5) * 30;
+    const gy = (e.clientY / window.innerHeight - 0.5) * 30;
+    const g1 = document.querySelector('.glow1');
+    if(g1){ g1.style.transform = `translate(${gx}px, ${gy}px)`; }
+  });
+</script>
+
+</body>
+</html>
